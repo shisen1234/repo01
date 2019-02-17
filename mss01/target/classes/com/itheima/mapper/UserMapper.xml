@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.UserMapper">
+    <select id="login" parameterType="user" resultType="user">
+        select * from user where username=#{username} and password = #{password}
+    </select>
+
+    <select id="findAll" resultType="user">
+        select * from USER
+    </select>
+
+    <update id="add" parameterType="user">
+        insert INTO  USER VALUES (id,#{name},#{gender},#{age},#{address},#{qq},#{email},null,null)
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE from user where id=#{id}
+    </delete>
+
+    <!--通过id来查找用户-->
+    <select id="findUser" parameterType="int" resultType="user">
+        SELECT * from user WHERE id=#{id}
+    </select>
+
+
+    <!--查询总记录数-->
+    <select id="findTotalCount" resultType="int">
+        SELECT count(*) from user
+    </select>
+
+    <!--查询用户列表信息-->
+    <select id="findUserList" parameterType="pageBean" resultType="user">
+        select * from user limit #{currentPage} ,#{rows}
+    </select>
+
+</mapper>
